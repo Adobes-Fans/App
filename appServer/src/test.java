@@ -14,44 +14,30 @@ public class test {
             ttt.keyPress(KeyEvent.VK_CONTROL);
             ttt.keyPress(KeyEvent.VK_SPACE);
             ttt.keyRelease(KeyEvent.VK_SPACE);
-            ttt.delay(1000);
-            ttt.keyPress(KeyEvent.VK_SPACE);
-            ttt.keyRelease(KeyEvent.VK_SPACE);
-            ttt.delay(1000);
-            ttt.keyPress(KeyEvent.VK_SPACE);
-            ttt.keyRelease(KeyEvent.VK_SPACE);
-            ttt.delay(1000);
-            ttt.keyPress(KeyEvent.VK_SPACE);
-            ttt.keyRelease(KeyEvent.VK_SPACE);
-            ttt.delay(1000);ttt.keyPress(KeyEvent.VK_SPACE);
-            ttt.keyRelease(KeyEvent.VK_SPACE);
-            ttt.delay(1000);
+            ttt.keyRelease(KeyEvent.VK_CONTROL);
 */
-/* 最小化 测试成功
+
+/* 最小化 测试成功*/
 
             ttt.keyPress(KeyEvent.VK_META);
-            ttt.delay(1500);
+            ttt.delay(200);
             System.out.println("按下command了");
             //ttt.keyPress(KeyEvent.VK_TAB);
             ttt.keyPress(KeyEvent.VK_M);
-            ttt.delay(500);
-            System.out.println("按下m了");
+            //ttt.delay(500);
+            //System.out.println("按下m了");
             //ttt.keyRelease(KeyEvent.VK_M);
             //ttt.keyRelease(KeyEvent.VK_CIRCUMFLEX);
-*/
+
 /* 最大化 测试成功
             ttt.keyPress(KeyEvent.VK_META);
             System.out.println("Command down");
-            ttt.delay(3300);
             ttt.keyPress(KeyEvent.VK_CONTROL);
             System.out.println("Control down");
 
-            ttt.delay(3355);
+            ttt.delay(200);
             ttt.keyPress(KeyEvent.VK_F);
             System.out.println("f down");
-            ttt.delay(1500);
-            ttt.keyRelease(KeyEvent.VK_F);
-            System.out.println("f UP");
 */
 
 /* lanchpad 测试失败

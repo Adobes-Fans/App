@@ -17,9 +17,11 @@ public class Control {
 
     private Dimension dim; //存储屏幕尺寸
     private Robot robot;//自动化对象
-    private int Sensitivity = 3;
+    private int Sensitivity = 2;
     private int screen_width, screen_height;
     private double lastDist = 0;
+
+    private int threeWhere = 0;
 
     public Control(){
         dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -76,6 +78,7 @@ public class Control {
         String[] part = str.split("&");
         switch (part[0]){
             case "1":{
+                threeWhere = 0;
                 if(part[1].equals("0")){
                     this.Click(InputEvent.BUTTON1_DOWN_MASK);
                     this.Release(InputEvent.BUTTON1_DOWN_MASK);
@@ -88,8 +91,11 @@ public class Control {
                 }
                 break;
             }
+
             //case 2有问题，传过来的是相对向量，dist计算有问题
             case "2":{
+                threeWhere = 0;
+
                 if(part[1].equals("0")){
 
                 }else if(part[1].equals("1")){
@@ -116,6 +122,11 @@ public class Control {
                         double angle2 = Math.acos(angle(_x1,_y1,1,0));//和(1,0)向量的夹角
                         if(angle2 >= PI/4 && angle2 <= 3*PI/4){
                             //上下滚动
+                            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                            if(_y1 < 0) robot.mouseWheel(-1);
+                            else        robot.mouseWheel(1);
+
+                            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
                         }else{
                             //左右滚动
@@ -123,8 +134,10 @@ public class Control {
                         }
                     }
                 }
+
                 break;
             }
+
             case "3":{
                 //三指的情况，不必记录中间的手指数据，因为三指是同向移动
                 //1:left 2:right 3:up 4:down
@@ -135,18 +148,36 @@ public class Control {
                     if(angle >= PI/4 && angle <= 3*PI/4){
                         //上下滚动
                         if(_y1 > 0){
-                            System.out.println("up???");
-                            _3Fingers(3);
+                            if(threeWhere == 4){
+                                //do nothing
+                            }else{
+                                System.out.println("down???");
+                                threeWhere = 4;
+                                _3Fingers(4);
+                            }
+
                         }else{
-                            System.out.println("down???");
-                            _3Fingers(4);
+                            if(threeWhere == 3){
+
+                            }else{
+                                System.out.println("up???");
+                                threeWhere = 3;
+                                _3Fingers(3);
+                            }
+
                         }
                     }else{
                         //左右滚动
                         if(_x1 > 0){
-                            _3Fingers(2);
+                            if (threeWhere == 2){
+
+                            }else{
+                                System.out.println("right???");
+                                threeWhere = 2;
+                                _3Fingers(2);
+                            }
                         }else{
-                            _3Fingers(1);
+                            //_3Fingers(1);
                         }
                     }
                 }else{
@@ -156,6 +187,7 @@ public class Control {
 
                 break;
             }
+            /*
             case "4":{
                 //1:四指散开
 
@@ -163,6 +195,7 @@ public class Control {
 
                 break;
             }
+            */
         }
     }
 
@@ -181,23 +214,38 @@ public class Control {
         robot.keyPress(KeyEvent.VK_CONTROL);
         switch (flag){
             case 1:{
-                robot.keyPress(KeyEvent.VK_LEFT);
-                robot.keyRelease(KeyEvent.VK_LEFT);
+                //do nothing
                 break;
             }
             case 2:{
-                robot.keyPress(KeyEvent.VK_RIGHT);
-                robot.keyRelease(KeyEvent.VK_RIGHT);
+                /*切换输入法*/
+                robot.keyPress(KeyEvent.VK_CONTROL);
+                robot.keyPress(KeyEvent.VK_SPACE);
+                robot.keyRelease(KeyEvent.VK_SPACE);
+                robot.keyRelease(KeyEvent.VK_CONTROL);
                 break;
             }
             case 3:{
-                robot.keyPress(KeyEvent.VK_UP);
-                robot.keyRelease(KeyEvent.VK_UP);
+                /*窗口最大化*/
+                robot.keyPress(KeyEvent.VK_META);
+                robot.keyPress(KeyEvent.VK_CONTROL);
+
+                robot.delay(200);
+                robot.keyPress(KeyEvent.VK_F);
+                robot.keyRelease(KeyEvent.VK_F);
+                robot.keyRelease(KeyEvent.VK_META);
+                robot.keyRelease(KeyEvent.VK_CONTROL);
                 break;
             }
             case 4:{
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
+                /*窗口最小化 不知道为什么实现不了*/
+                robot.keyPress(KeyEvent.VK_META);
+
+                robot.delay(200);
+                robot.keyPress(KeyEvent.VK_M);
+                robot.delay(120);
+                robot.keyRelease(KeyEvent.VK_M);
+                robot.keyRelease(KeyEvent.VK_META);
                 break;
             }
         }

@@ -1,9 +1,6 @@
 package com.example.crcrcry.touchpad;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
+import java.util.Date;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,13 +8,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private int fingers = 0;
     private StringBuffer x;
     private int[] lastPoint = new int[8];
+    private long startTime = 0, thisTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //多线程socket，main线程无法建立socket
                 new Thread(){
+
+
                     @Override
                     public void run(){
                         try{
@@ -71,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
                             pad.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
                                 public boolean onTouch(View v, MotionEvent event) {
+
+                                    thisTime = new Date().getTime();
+                                    if((thisTime%300)>290){
+                                        System.out.println("Forbidden time");
+                                        return false;
+                                    }
+
 
                                     switch (event.getAction() & MotionEvent.ACTION_MASK){
                                         //单指按下
@@ -160,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
                                     socketOut.println(x);
                                     socketOut.flush();
                                     System.out.println("Client: " + x);
+
+
                                     return false;
                                 }
                             });
