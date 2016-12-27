@@ -19,11 +19,11 @@ public class test {
 
 /* 最小化 测试成功*/
 
-            ttt.keyPress(KeyEvent.VK_META);
-            ttt.delay(200);
-            System.out.println("按下command了");
-            //ttt.keyPress(KeyEvent.VK_TAB);
-            ttt.keyPress(KeyEvent.VK_M);
+//            ttt.keyPress(KeyEvent.VK_META);
+//            ttt.delay(200);
+//            System.out.println("按下command了");
+//            //ttt.keyPress(KeyEvent.VK_TAB);
+//            ttt.keyPress(KeyEvent.VK_M);
             //ttt.delay(500);
             //System.out.println("按下m了");
             //ttt.keyRelease(KeyEvent.VK_M);
@@ -40,27 +40,37 @@ public class test {
             System.out.println("f down");
 */
 
-/* lanchpad 测试失败
-            ttt.keyPress(KeyEvent.VK_F4);
-            ttt.delay(2500);
-            ttt.keyRelease(KeyEvent.VK_F4);
-*/
-/* mission control 三指触控 测试失败
-   切换标签 测试成功
-            ttt.keyPress(KeyEvent.VK_CONTROL);
-            System.out.println("control");
+// lanchpad 测试失败
+            System.out.println("f4");
+            for(int i = 0; i < 5; i++){
+                ttt.keyPress(KeyEvent.VK_F12);
+                ttt.delay(200);
+                ttt.keyRelease(KeyEvent.VK_F12);
+                ttt.delay(200);
+            }
 
-            ttt.delay(3500);
-            ttt.keyPress(KeyEvent.VK_LEFT);
-            System.out.println("left");
-            ttt.delay(1500);
-            ttt.keyRelease(KeyEvent.VK_LEFT);
-            ttt.delay(1500);
-            ttt.keyPress(KeyEvent.VK_RIGHT);
-            System.out.println("right");
-            ttt.delay(1500);
-            ttt.keyRelease(KeyEvent.VK_RIGHT);
-*/
+//            ttt.delay(2500);
+//            ttt.keyRelease(KeyEvent.VK_F4);
+
+// mission control 三指触控 测试失败
+//   切换标签 测试成功
+            ttt.keyPress(KeyEvent.VK_META);
+            System.out.println("command");
+            ttt.delay(1800);
+//            ttt.delay(3500);
+//            ttt.keyPress(KeyEvent.VK_LEFT);
+//            System.out.println("left");
+//            ttt.delay(1500);
+//            ttt.keyRelease(KeyEvent.VK_LEFT);
+            for(int i = 0; i < 10; i++){
+                ttt.delay(300);
+                ttt.keyPress(KeyEvent.VK_UP);
+                System.out.println("right");
+                ttt.delay(300);
+                ttt.keyRelease(KeyEvent.VK_UP);
+            }
+
+
 
 /* 鼠标滚动 测试成功
             ttt.mousePress(InputEvent.BUTTON1_DOWN_MASK);

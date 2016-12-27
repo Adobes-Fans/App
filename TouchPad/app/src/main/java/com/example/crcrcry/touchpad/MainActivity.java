@@ -16,7 +16,7 @@ import java.net.Socket;
 public class MainActivity extends AppCompatActivity {
     //屏幕控件
     private int width, height;
-    private Button end, start;
+    private Button start;
     private EditText ip;
     private com.example.crcrcry.touchpad.MyView pad;
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         height = screen.heightPixels;
 
         //初始化屏幕控件
-        end = (Button) findViewById(R.id.end);
         start = (Button) findViewById(R.id.start);
         pad = (com.example.crcrcry.touchpad.MyView) findViewById(R.id.pad);
         ip = (EditText) findViewById(R.id.ip);
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run(){
                         try{
-                            start.setClickable(false);
+                            //start.setClickable(false);
                             //建立socket连接
                             String ip_str = ip.getText().toString();        //10.111.230.175
                             //String ip_str = "10.180.35.148";
@@ -175,20 +174,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }.start();
-            }
-        });
-
-        
-        end.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    start.setClickable(true);
-                    System.out.println("Socket disconnect!");
-                    socket.close();
-                }catch (IOException e){
-                    System.out.println("Socket close error!");
-                }
             }
         });
 

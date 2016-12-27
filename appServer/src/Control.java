@@ -22,6 +22,7 @@ public class Control {
     private double lastDist = 0;
 
     private int threeWhere = 0;
+    private boolean flag = true;
 
     public Control(){
         dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,6 +79,7 @@ public class Control {
         String[] part = str.split("&");
         switch (part[0]){
             case "1":{
+                flag = true;
                 threeWhere = 0;
                 if(part[1].equals("0")){
                     this.Click(InputEvent.BUTTON1_DOWN_MASK);
@@ -111,7 +113,6 @@ public class Control {
                         double nowDist = distance(_x1,_y1,_x2,_y2);
                         if(nowDist > lastDist){
                             //放大
-
                         }else{
                             //缩小
 
@@ -130,7 +131,20 @@ public class Control {
 
                         }else{
                             //左右滚动
-
+//                            if(_x1 > 0 && flag){
+//                                robot.keyPress(KeyEvent.VK_RIGHT);
+//                                robot.keyRelease(KeyEvent.VK_RIGHT);
+//                                flag = false;
+//                            }else{
+//                                if(flag){
+//                                    for(int i = 0; i < 2; i++){
+//
+//                                    }
+//
+//                                    flag = false;
+//                                }
+//
+//                            }
                         }
                     }
                 }
@@ -151,18 +165,23 @@ public class Control {
                             if(threeWhere == 4){
                                 //do nothing
                             }else{
-                                System.out.println("down???");
-                                threeWhere = 4;
-                                _3Fingers(4);
+                                if(threeWhere == 3 || threeWhere == 0){
+                                    System.out.println("down???");
+                                    threeWhere = 4;
+                                    _3Fingers(4);
+                                }
+
                             }
 
                         }else{
                             if(threeWhere == 3){
 
                             }else{
-                                System.out.println("up???");
-                                threeWhere = 3;
-                                _3Fingers(3);
+                                if(threeWhere == 4 || threeWhere == 0){
+                                    System.out.println("up???");
+                                    threeWhere = 3;
+                                    _3Fingers(3);
+                                }
                             }
 
                         }
@@ -172,12 +191,22 @@ public class Control {
                             if (threeWhere == 2){
 
                             }else{
-                                System.out.println("right???");
-                                threeWhere = 2;
-                                _3Fingers(2);
+                                if (threeWhere == 0 || threeWhere == 1){
+                                    System.out.println("right???");
+                                    threeWhere = 2;
+                                    _3Fingers(2);
+                                }
                             }
                         }else{
-                            //_3Fingers(1);
+                            if (threeWhere == 1){
+
+                            }else{
+                                if (threeWhere == 0 || threeWhere == 2){
+                                    System.out.println("left???");
+                                    threeWhere = 1;
+                                    _3Fingers(1);
+                                }
+                            }
                         }
                     }
                 }else{
@@ -214,37 +243,46 @@ public class Control {
         robot.keyPress(KeyEvent.VK_CONTROL);
         switch (flag){
             case 1:{
-                //do nothing
+                /*itune last*/
+                robot.keyPress(KeyEvent.VK_META);
+                robot.delay(10);
+                for(int i = 0; i < 1; i++){
+                    robot.keyPress(KeyEvent.VK_LEFT);
+                    robot.keyRelease(KeyEvent.VK_LEFT);
+                }
+                robot.keyRelease(KeyEvent.VK_META);
                 break;
             }
             case 2:{
-                /*切换输入法*/
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyPress(KeyEvent.VK_SPACE);
-                robot.keyRelease(KeyEvent.VK_SPACE);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
+                /*itune last*/
+                robot.keyPress(KeyEvent.VK_META);
+                robot.delay(10);
+                for(int i = 0; i < 1; i++){
+                    robot.keyPress(KeyEvent.VK_RIGHT);
+                    robot.keyRelease(KeyEvent.VK_RIGHT);
+                }
+                robot.keyRelease(KeyEvent.VK_META);
                 break;
             }
             case 3:{
-                /*窗口最大化*/
+                /*itune声音增大*/
                 robot.keyPress(KeyEvent.VK_META);
-                robot.keyPress(KeyEvent.VK_CONTROL);
-
-                robot.delay(200);
-                robot.keyPress(KeyEvent.VK_F);
-                robot.keyRelease(KeyEvent.VK_F);
+                robot.delay(10);
+                for(int i = 0; i < 3; i++){
+                    robot.keyPress(KeyEvent.VK_UP);
+                    robot.keyRelease(KeyEvent.VK_UP);
+                }
                 robot.keyRelease(KeyEvent.VK_META);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
                 break;
             }
             case 4:{
-                /*窗口最小化 不知道为什么实现不了*/
+                /*itune减小*/
                 robot.keyPress(KeyEvent.VK_META);
-
-                robot.delay(200);
-                robot.keyPress(KeyEvent.VK_M);
-                robot.delay(120);
-                robot.keyRelease(KeyEvent.VK_M);
+                robot.delay(100);
+                for(int i = 0; i < 3; i++){
+                    robot.keyPress(KeyEvent.VK_DOWN);
+                    robot.keyRelease(KeyEvent.VK_DOWN);
+                }
                 robot.keyRelease(KeyEvent.VK_META);
                 break;
             }

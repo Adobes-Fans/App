@@ -15,29 +15,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="start"
-            android:layout_marginTop="66sp"
-    />
-    <Button
-            android:id="@+id/end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="end"
-            android:layout_marginTop="66sp"
-            android:layout_marginLeft="90sp"
-    />
+            android:layout_below="@+id/textView" android:layout_alignEnd="@+id/textView"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Input computer's IP address:"
             android:textColor="#000"
             android:textSize="20sp"
-    />
+            android:id="@+id/textView"/>
     <EditText
             android:id="@+id/ip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30sp"
-    />
+            android:layout_alignBottom="@+id/start" android:layout_toStartOf="@+id/start"/>
 
     <com.example.crcrcry.touchpad.MyView
             android:id="@+id/pad"
@@ -45,6 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/start"/>
+            android:layout_below="@+id/ip"/>
 
 </RelativeLayout>
